@@ -26,6 +26,13 @@ export class UsersService {
 
   }
 
+  private create(user: any) {
+
+    let uri = `${this.UriApi}/${ApiRoutes.signup}`;
+
+    return this.http.post(uri, JSON.stringify(user), this.loadHeaders());
+  }
+
   public getUsers(token: string = '') {
 
     let uri = `${this.UriApi}/${ApiRoutes.users}`;
