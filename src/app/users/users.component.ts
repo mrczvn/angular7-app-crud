@@ -16,18 +16,40 @@ export class UsersComponent implements OnInit {
 
   constructor(private router: Router, private usersService: UsersService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.usersService.getUsers(this.token)
-      .subscribe(data => {
-        this.users = data;
-        console.log(this.users)
-      })
+    try {
+      const results = await this.usersService.getUsers(this.token).toPromise();
+
+      this.users = results;
+      console.log(this.users);
+
+    } catch (error) {
+
+      localStorage.removeItem('token');
+      this.router.navigate(['/']);
+
+    }
   }
 
   private logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  private delete(id) {
+
+    this.usersService.delete(id, this.token)
+      .subscribe(rs => {
+        console.log(rs);
+        this.users = this.users.filter(user => id != user.id);
+
+        if (this.users.length < 1) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/']);
+        }
+
+      });
   }
 
 }
