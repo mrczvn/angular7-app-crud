@@ -5,8 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { AuthGuardService } from './guard/auth-guard.service';
+import { ResgisterComponent } from './resgister/resgister.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: ResgisterComponent
+  },
   {
     path: 'login',
     component: LoginComponent
