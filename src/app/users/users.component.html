@@ -2,5 +2,26 @@
   <div class="col-md-12 text-right">
     <button type="button" class="btn btn-sm btn-outline-dark" (click)="logout()">Logout</button>
   </div>
+</div>
 
+<h1>Lista de Usários</h1>
+
+<hr />
+
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table table-borderless">
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Password</th>
+
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+      </tr>
+    </table>
+  </div>
 </div>
