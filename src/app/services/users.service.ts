@@ -18,27 +18,6 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  public login(user: any) {
-
-    let uri = `${this.UriApi}/${ApiRoutes.login}`;
-
-    return this.http.post(uri, JSON.stringify(user), this.loadHeaders());
-
-  }
-
-  private create(user: any) {
-
-    let uri = `${this.UriApi}/${ApiRoutes.signup}`;
-
-    return this.http.post(uri, JSON.stringify(user), this.loadHeaders());
-  }
-
-  public getUsers(token: string = '') {
-
-    let uri = `${this.UriApi}/${ApiRoutes.users}`;
-    return this.http.get<Array<any>>(uri, this.loadHeaders(token));
-  }
-
   private loadHeaders(token: string = '') {
 
     let headers = new HttpHeaders({
@@ -47,5 +26,39 @@ export class UsersService {
     });
 
     return { headers };
+
   }
+
+  public login(user: any) {
+
+    let uri = `${this.UriApi}/${ApiRoutes.login}`;
+
+    return this.http.post(uri, JSON.stringify(user), this.loadHeaders());
+
+  }
+
+  public create(user: any) {
+
+    let uri = `${this.UriApi}/${ApiRoutes.signup}`;
+
+    return this.http.post(uri, JSON.stringify(user), this.loadHeaders());
+
+  }
+
+  public getUsers(token: string = '') {
+
+    let uri = `${this.UriApi}/${ApiRoutes.users}`;
+
+    return this.http.get<Array<any>>(uri, this.loadHeaders(token));
+
+  }
+
+  public delete(id, token: string = '') {
+
+    let uri = `${this.UriApi}/${ApiRoutes.users}/${id}`;
+
+    return this.http.delete(uri, this.loadHeaders(token));
+
+  }
+
 }

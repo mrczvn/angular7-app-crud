@@ -19,8 +19,6 @@ export class ResgisterComponent implements OnInit {
 
   ngOnInit() {
 
-    localStorage.removeItem('token');
-
     this.user = {
       name: '',
       email: '',
@@ -33,6 +31,8 @@ export class ResgisterComponent implements OnInit {
     if (form.valid) {
       try {
         const response = await this.usersService.create(this.user).toPromise();
+
+        localStorage.removeItem('token');
 
         this.router.navigate(['/login']);
 
